@@ -1,0 +1,117 @@
+{
+  "author": "Oscar Dowson",
+  "name": "newsvendor",
+  "date": "2020-07-10",
+  "description": "A StochOptFormat implementation of the classical two-stage newsvendor problem.",
+  "version": {"major": 0, "minor": 2},
+  "root": {
+    "state_variables": {
+      "x": {"initial_value": 0.0}
+    },
+    "successors": {"first_stage": 1.0}
+  },
+  "nodes": {
+    "first_stage": {
+      "subproblem": "first_stage_subproblem",
+      "realizations": [],
+      "successors": {"second_stage": 1.0}
+    },
+    "second_stage": {
+      "subproblem": "second_stage_subproblem",
+      "realizations": [
+        {"probability": 0.4, "support": {"d": 10.0}},
+        {"probability": 0.6, "support": {"d": 14.0}}
+      ],
+      "successors": {}
+    }
+  },
+  "subproblems": {
+    "first_stage_subproblem": {
+      "state_variables": {
+        "x": {"in": "x_in", "out": "x_out"}
+      },
+      "random_variables": [],
+      "subproblem": {
+        "version": {"major": 0, "minor": 4},
+        "variables": [{"name": "x_in"}, {"name": "x_out"}],
+        "objective": {
+          "sense": "max",
+          "function": {
+            "head": "ScalarAffineFunction",
+            "terms": [{"variable": "x_out", "coefficient": -1.0}],
+            "constant": 0.0
+          }
+        },
+        "constraints": [{
+          "function": {"head": "SingleVariable", "variable": "x_out"},
+          "set": {"head": "GreaterThan", "lower": 0.0}
+        }]
+      }
+    },
+    "second_stage_subproblem": {
+      "state_variables": {
+        "x": {"in": "x_in", "out": "x_out"}
+      },
+      "random_variables": ["d"],
+      "subproblem": {
+        "version": {"major": 0, "minor": 4},
+        "variables": [
+          {"name": "x_in"}, {"name": "x_out"}, {"name": "u"}, {"name": "d"}
+        ],
+        "objective": {
+          "sense": "max",
+          "function": {
+            "head": "ScalarAffineFunction",
+            "terms": [{"variable": "u", "coefficient": 1.5}],
+            "constant": 0.0
+          }
+        },
+        "constraints": [{
+          "function": {
+            "head": "ScalarAffineFunction",
+            "terms": [
+              {"variable": "u", "coefficient": 1.0},
+              {"variable": "x_in", "coefficient": -1.0}
+            ],
+            "constant": 0.0
+          },
+          "set": {"head": "LessThan", "upper": 0.0}
+        }, {
+          "function": {
+            "head": "ScalarAffineFunction",
+            "terms": [
+              {"variable": "u", "coefficient": 1.0},
+              {"variable": "d", "coefficient": -1.0}
+            ],
+            "constant": 0.0
+          },
+          "set": {"head": "LessThan", "upper": 0.0}
+        }, {
+          "function": {"head": "SingleVariable", "variable": "u"},
+          "set": {"head": "GreaterThan", "lower": 0.0}
+        }]
+      }
+    }
+  },
+  "validation_scenarios": [
+    {
+      "probability": 0.4,
+      "scenario": [
+        {"node": "first_stage", "support": {}},
+        {"node": "second_stage", "support": {"d": 10.0}}
+      ]
+    }, {
+      "probability": 0.3,
+      "scenario": [
+        {"node": "first_stage", "support": {}},
+        {"node": "second_stage", "support": {"d": 14.0}}
+      ]
+    }, {
+      "probability": 0.3,
+      "scenario": [
+        {"node": "first_stage", "support": {}},
+        {"node": "second_stage", "support": {"d": 9.0}}
+      ]
+    }
+  ]
+}
