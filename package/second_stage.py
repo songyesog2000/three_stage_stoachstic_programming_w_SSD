@@ -4,7 +4,7 @@ import math
 import numpy as np
 from cvxopt import solvers,
 
-max_itr = 100000
+max_itr = 100
 solver_list = ['CVXOPT']
 programming_list = ['cp','cpl','linear']
 class second_stage_solver:
