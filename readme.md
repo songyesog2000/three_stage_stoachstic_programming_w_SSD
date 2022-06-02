@@ -1,9 +1,3 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css" integrity="sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js" integrity="sha384-ljao5I1l+8KYFXG7LNEA7DyaFvuvSCmedUf6Y6JI7LJqiu8q5dEivP2nDdFH31V4" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
-    
-
 # multicut algorithm for multi-stage stochastic programming with SSD constraints
 
 ### This is a working-on respostory
@@ -14,11 +8,11 @@ Our eventual goal is to <br>
 
 Currently, we have realized our algorithm on a toy problem ---- three-stage news-vendor problem:<br>
 
-1) First stage: agents require certain units of fix-investment from agents <br>
+1) First stage: agents require certain units of premium from vendors <br>
 &emsp;variable:<br>
-&emsp;&emsp; &emsp;$ q\in (0,10)$ - units of investment<br>
+&emsp;&emsp; &emsp;$ q\in (0,10)$ - units of premium<br>
 &emsp;coeffients:<br>
-&emsp;&emsp; &emsp; 0.3 - cost per unit of investment<br>
+&emsp;&emsp; &emsp; -0.3 - cost per unit of premium<br>
             
 2) Second stage: vendor buys news paper from agent, the available quantity range depends on the invesment <br>
 &emsp;  variable:<br>
@@ -31,11 +25,14 @@ Currently, we have realized our algorithm on a toy problem ---- three-stage news
 3) Third stage: vendor sells news paper to individuals<br>
 &emsp;  variables:<br>
 &emsp; &emsp; &emsp; $z \in (0,x)$, sold quantity of news paper<br>
+&emsp; coeffients:<br>
+&emsp; &emsp; &emsp;1.5 - retail price of news paper<br>
 &emsp;  random variables:<br>
 &emsp; &emsp; &emsp; $d \in (0,+\infty)$, quantity of demands<br> 
 
 We write the SSD constrainted problem in the formulation form of (10)-(15) in [1] , given random reward sequence as $(R_1,R_2,R_3)$:
-
+<center><img src="formulations/formulation_1.png" title="Q_1" width="500px"></center>
+<!-- 
 $$
 \begin{align*}
 \max_{q,z_1} &~ z_1 + \sum^S_{i=1} P(\xi^2_i) Q_2(q,z_1,cap(\xi^2_i))\\
@@ -44,11 +41,11 @@ $$
   &~ z_1\leq -0.3q\\
   &~ q\in [0,10]
 \end{align*}
-$$
+$$ -->
 
 then $Q_2(q,z_1,cap(\xi^2_i))$ responds to the problem:
-
-$$
+<center><img src="formulations/formulation_2.png" title="Q_2" width="500px"></center>
+<!-- $$
 \begin{align*}
 \max_{x,z_2} &~ z_2 + \sum^{L_s}_{j=1} P(\xi^3_j|\xi^2_i) * 1.5 * \min(x,d(\xi^3_j))\\
   \mathrm{s.t.} ~&~\sum^{L_s}_{j=1}P(\xi^3_j|\xi^2_i) [\eta-\sigma -1.5 * \min(x,d(\xi^3_j))]_+)\leq  \\
@@ -58,7 +55,7 @@ $$
   &~ x\leq q*cap(\xi^2_i)\\
   &~ x\geq 0
 \end{align*}
-$$
+$$ -->
 
 <br>
 
