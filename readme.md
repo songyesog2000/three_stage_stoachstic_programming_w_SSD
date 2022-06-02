@@ -41,7 +41,9 @@ $$
   &~ q\in [0,10]
 \end{align*}
 $$
+
 then $Q_2(q,z_1,cap(\xi^2_i))$ responds to the problem:
+
 $$
 \begin{align*}
 \max_{x,z_2} &~ z_2 + \sum^{L_s}_{j=1} P(\xi^3_j|\xi^2_i) * 1.5 * \min(x,d(\xi^3_j))\\
