@@ -1,5 +1,4 @@
-header-includes:
-  - \usepackage{array}
+
 
 # multicut algorithm for multi-stage stochastic programming with SSD constraints
 
