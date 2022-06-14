@@ -59,6 +59,38 @@ $$ -->
 
 <br>
 
+### Multi-item news-vendor problem
+The above news-vendor is a one-dimensional problem and we will extend this into a multi-dimension by considering multi-items to sell and the vendor can rebalance the stocks after the inital stocking.<br>
+Assuming vendors have $n$ different kinds of items to stock and sell
+$$
+\begin{align*}
+\max_{q,z_1} &~ z_1 + \sum^S_{i=1} P(\xi^2_i) Q_2(x_1,z_1,x_2(\xi^2_i))\\
+  \mathrm{s.t.} ~&~\sum^S_{i=1} P(\xi^2_i) [\eta-z_1 +y_1- Q_2(x_1,z_1,x_2(\xi^2_i)]_+\leq \\
+  &~~~~~~~~~~\sum^S_{i=1} P(\xi^2_i)[\eta-R_2(\xi^2_i)-\sum^{L_i}_{j=1} P(\xi^3_j|\xi^2_i)R_3(\xi^3_j)]_+\\
+  &~ z_1\leq -c_1 x_1\\
+  &~ c_1 x_1\leq b_1  \\
+  &~ x_1\in R^n_+
+\end{align*}
+$$
+The $Q_2(x_1,z_1,\cdot)$ respoding to  
+$$
+\begin{align*}
+\max_{x,z_2} &~ z_2 + \sum^{L_s}_{j=1} P(\xi^3_j|\xi^2_i)  Q_3(r_2,x_2,\xi^3_j)\\
+  \mathrm{s.t.} ~&~\sum^{L_s}_{j=1}P(\xi^3_j|\xi^2_i) [\eta-\sigma - p_2(\xi^2_i) (x_1-r_2)]_+)\leq  \\
+  & ~~~~~~~~~~~~~~~~~~~ \sum^{L_s}_{j=1} P(\xi^3_j|\xi^2_i) (\eta - R_3(\xi^2_j))_+  \\
+  &~ z_2\leq -c_2(\xi^2_i) x_2 + p_2(\xi^2_i)(x_1 - r_2)\\
+  &~ r_2 = \max(x_1-d_2(\xi^2_i),0) \\
+  &~\sigma = z_1+z_2-y_1-y_2(\xi^2_i) \\
+  &~ c_2(\xi^2_i) x_2\leq p_2 (\xi^2_i) x_1 + b_2\\
+  &~ x_2\in R^n_+
+\end{align*}
+$$
+$Q_3(r_1,x_2,\xi^3_j)$ is simply evaluated as
+$$
+\begin{align*}
+p_3(\xi^3_j)\max(r_2+x_2,d_3(\xi^3_j))
+\end{align*}
+$$
 
 ### Two jupyter notebook files 
 
