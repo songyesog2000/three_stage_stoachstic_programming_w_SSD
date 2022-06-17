@@ -81,14 +81,14 @@ $$
   &~ z_2\leq -c_2(\xi^2_i) x_2 + p_2(\xi^2_i)(x_1 - r_2)\\
   &~ r_2 = \max(x_1-d_2(\xi^2_i),0) \\
   &~\sigma = z_1+z_2-y_1-y_2(\xi^2_i) \\
-  &~ c_2(\xi^2_i) x_2\leq p_2 (\xi^2_i) x_1 + b_2\\
+  &~ c_2(\xi^2_i) x_2\leq p_2 (\xi^2_i) (x_1-r_2) + b_2\\
   &~ x_2\in R^n_+
 \end{align*}
 $$
 $Q_3(r_1,x_2,\xi^3_j)$ is simply evaluated as
 $$
 \begin{align*}
-p_3(\xi^3_j)\max(r_2+x_2,d_3(\xi^3_j))
+p_3(\xi^3_j)\min(r_2+x_2,d_3(\xi^3_j))
 \end{align*}
 $$
 

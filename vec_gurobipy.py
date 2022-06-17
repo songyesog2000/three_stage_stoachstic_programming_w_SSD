@@ -9,6 +9,13 @@ Semidan Robaina Estevez
 import numpy as np
 from gurobipy import Model, GRB
 
+class vec_Model(Model):
+    def __init__(self,name):
+        super().__init__(name)
+    
+    def addConstr_vec(self,linexpr_vec, name=None):
+        
+
 class GurobiModel:
     """
     Constructs a gurobipy model from a matrix formulation. Currently only LPs
